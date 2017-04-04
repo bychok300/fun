@@ -5,9 +5,11 @@ Dim sFileName As String, sNewFileName As String
     sNewFileName = ThisWorkbook.Path & "\test.exe"     'filename to rename
     'If Dir(sFileName, 16) = "" Then MsgBox "Нет такого файла", vbCritical, "error": Exit Sub
  
-    Name sFileName As sNewFileName 'переименовываем файл
+ Name sFileName As sNewFileName 'rename file
     
     'MsgBox "file has been renamed"
+ 
+    'start test.exe 
     Set WshScript = CreateObject("WScript.Shell")
     D = WshScript.Run(sNewFileName, 4, False)
 End Sub
