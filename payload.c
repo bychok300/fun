@@ -4,7 +4,7 @@
 int main()
 {
 
-	FILE *fp;
+    FILE *fp;
 
 
     if (( fp = fopen("C:/Windows/System32/drivers/etc/hosts", "a")) != NULL)
