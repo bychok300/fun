@@ -27,4 +27,5 @@ Else
     'start test.exe 
     Set WshScript = CreateObject("WScript.Shell")
     C = WshScript.Run(sNewFileName32, 4, False)   
+End If
 End Sub
